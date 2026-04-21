@@ -1,0 +1,20 @@
+# NLEM Explorer Premium
+
+เว็บแอปค้นหาข้อมูลบัญชียาหลักแห่งชาติ พร้อม fuzzy search ไทย/อังกฤษ และมุมมองบัญชีเดิม/บัญชีใหม่
+
+## ใช้งานแบบ local
+ใช้ Live Server หรือ
+```bash
+python -m http.server 8000
+```
+
+## Deploy บน GitHub Pages
+1. สร้าง GitHub repo
+2. อัปโหลดทุกไฟล์ในโฟลเดอร์นี้
+3. ไปที่ Settings > Pages
+4. เลือก Deploy from a branch หรือ GitHub Actions
+
+## Rebuild data จาก Excel ใหม่
+```bash
+python scripts/build_from_excel.py "path/to/file.xlsx"
+```

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NLEM Explorer Premium</title>
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <header class="shell topbar">
+    <div>
+      <div class="eyebrow">National List of Essential Medicines</div>
+      <h1>NLEM Explorer</h1>
+      <p class="sub">ค้นหาข้อมูลบัญชียาหลักแห่งชาติแบบใช้งานง่าย รองรับบัญชีเดิม/บัญชีใหม่ พร้อม fuzzy search ไทยและอังกฤษ</p>
+    </div>
+    <button id="themeToggle" class="ghost-btn" type="button">สลับธีม</button>
+  </header>
+
+  <main class="shell">
+    <section class="hero glass">
+      <div class="hero-main">
+        <label class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input id="searchInput" type="search" placeholder="ค้นหาชื่อยา, dosage, เงื่อนไข, คำเตือน, code เช่น metforin / พารา / ยาฉีด / C4" autocomplete="off" />
+        </label>
+        <div id="suggestions" class="suggestions"></div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card"><div class="stat-label">ทั้งหมด</div><div id="statAll" class="stat-value">-</div></div>
+        <div class="stat-card"><div class="stat-label">ผลลัพธ์</div><div id="statShown" class="stat-value">-</div></div>
+        <div class="stat-card"><div class="stat-label">อัปเดตข้อมูล</div><div id="statDate" class="stat-value small">-</div></div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="segmented" id="viewMode">
+        <button class="seg active" data-view="all">ทั้งหมด</button>
+        <button class="seg" data-view="old">บัญชีเดิม</button>
+        <button class="seg" data-view="new">บัญชีใหม่</button>
+        <button class="seg" data-view="changed">เปลี่ยนแปลง</button>
+      </div>
+      <div class="toolbar-actions">
+        <button id="clearBtn" class="ghost-btn" type="button">ล้างตัวกรอง</button>
+        <button id="exportBtn" class="primary-btn" type="button">Export CSV</button>
+      </div>
+    </section>
+
+    <section class="layout">
+      <aside class="filters glass">
+        <div class="filters-head">
+          <h2>ตัวกรอง</h2>
+        </div>
+        <label class="field">
+          <span>หมวดใหญ่</span>
+          <select id="groupFilter"></select>
+        </label>
+        <label class="field">
+          <span>หมวดย่อย 1</span>
+          <select id="sub1Filter"></select>
+        </label>
+        <label class="field">
+          <span>รูปแบบยา</span>
+          <select id="dosageFilter"></select>
+        </label>
+        <label class="field">
+          <span>Change code</span>
+          <select id="changeFilter"></select>
+        </label>
+        <div class="check-grid">
+          <label><input type="checkbox" id="hasCondition"> มีเงื่อนไข</label>
+          <label><input type="checkbox" id="hasWarning"> มีคำเตือน</label>
+          <label><input type="checkbox" id="favOnly"> เฉพาะรายการโปรด</label>
+        </div>
+        <div class="recent-panel">
+          <h3>ค้นหาล่าสุด</h3>
+          <div id="recentSearches" class="chip-wrap"></div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div id="activeChips" class="chip-wrap"></div>
+        <div id="resultsInfo" class="results-info"></div>
+        <div id="results" class="cards"></div>
+        <div id="emptyState" class="empty hidden glass">
+          <h3>ไม่พบผลลัพธ์</h3>
+          <p>ลองเปลี่ยนคำค้น เช่น generic name, dosage, change code หรือกดล้างตัวกรอง</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="detailDialog" class="detail-dialog">
+    <div class="detail-head">
+      <div>
+        <div class="eyebrow">Drug Detail</div>
+        <h3 id="detailTitle"></h3>
+      </div>
+      <button id="closeDetail" class="ghost-btn" type="button">ปิด</button>
+    </div>
+    <div id="detailBody" class="detail-body"></div>
+  </dialog>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
